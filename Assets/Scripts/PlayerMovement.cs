@@ -6,6 +6,8 @@ public class PlayerMovement : MonoBehaviour
     public float Speed;
     float move;
 
+    Vector2 moveInput;
+
     public float JumpForce;
     public bool IsJumping;
 
@@ -19,8 +21,8 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        move = Input.GetAxis("Horizontal");
-        rb2d.linearVelocity = new Vector2(move * Speed, rb2d.linearVelocity.y);
+        moveInput = new Vector2 (Input.GetAxis("Horizontal"), Input.GetAxisRaw("Vertical"));
+        rb2d.AddForce (moveInput * Speed);
 
         if (Input.GetButtonDown("Jump") && !IsJumping)
         {
